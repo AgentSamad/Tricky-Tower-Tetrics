@@ -9,20 +9,35 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float snappingDistance = 0.1f;
+    private bool gameOver;
+
 
     private void Start()
     {
         TetrisSpawner.SpawnTetris?.Invoke(spawnPoint);
+        GameEvents.OnGameOver += GameOver;
+
         if (TetrisSpawner.SpawnTetris == null)
             print("Its Null");
 
         input.Init();
-        
+
         print("I am enabled");
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnGameOver -= GameOver;
     }
 
     private void Update()
     {
+        if(gameOver) return;
         input.ControlTetris(this.transform, snappingDistance);
+    }
+
+    void GameOver()
+    {
+        gameOver = true;
     }
 }

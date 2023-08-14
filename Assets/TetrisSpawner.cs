@@ -42,6 +42,7 @@ public class TetrisSpawner : MonoBehaviour
     {
         var sortedIndex = Random.Range(0, tetrisBlocks.Count);
         var data = tetrisBlocks[sortedIndex];
+        GameEvents.InvokeNextTetrisImage(data.icon);
         // nextPieceSprite.value = data.icon;
         // OnPieceSpawned.Raise();
         return data;

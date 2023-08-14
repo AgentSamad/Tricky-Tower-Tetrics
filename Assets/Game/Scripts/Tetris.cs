@@ -38,7 +38,6 @@ public class Tetris : MonoBehaviour
 
         OnTetrisPlaced.RemoveAllListeners();
         OnTetrisFall.RemoveAllListeners();
-        print(" On disbale is calling");
     }
 
 

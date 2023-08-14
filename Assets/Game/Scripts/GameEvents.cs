@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class GameEvents
 {
     public static Action OnTetrisRotate;
     public static Action OnTetrisDash;
-
+    public static Action<Sprite> OnNextTetrisImage;
 
     public static Action OnGameStarted;
     public static Action OnGameOver;
@@ -36,5 +34,10 @@ public class GameEvents
     public static void InvokeLivesChanged()
     {
         OnLivesChanged?.Invoke();
+    }
+
+    public static void InvokeNextTetrisImage(Sprite s)
+    {
+        OnNextTetrisImage?.Invoke(s);
     }
 }

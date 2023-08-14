@@ -38,6 +38,7 @@ public class UiManager : MonoBehaviour
     {
         GameEvents.OnGameStarted += SetUI;
         GameEvents.OnLivesChanged += SetLives;
+        GameEvents.OnNextTetrisImage += SetNextTetris;
         GameEvents.OnGameOver += GameOver;
 
         pauseBtn.onClick.AddListener(PauseButtonEvent);
@@ -52,8 +53,9 @@ public class UiManager : MonoBehaviour
     {
         GameEvents.OnGameStarted -= SetUI;
         GameEvents.OnLivesChanged -= SetLives;
+        GameEvents.OnNextTetrisImage -= SetNextTetris;
         GameEvents.OnGameOver -= GameOver;
-        
+
         pauseBtn.onClick.RemoveAllListeners();
         restartBtn.onClick.RemoveAllListeners();
         mainMenuBtn.onClick.RemoveAllListeners();
@@ -117,6 +119,12 @@ public class UiManager : MonoBehaviour
     void MainMenuButtonEvent()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+
+    void SetNextTetris(Sprite sprite)
+    {
+        nextTetrisImage.sprite = sprite;
     }
 
     void GameOver()
