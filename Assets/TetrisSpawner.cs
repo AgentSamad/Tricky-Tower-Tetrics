@@ -62,7 +62,7 @@ public class TetrisSpawner : MonoBehaviour
 
     public void TetrisFall()
     {
-        Debug.Log("Tetris Fall");
+       // Debug.Log("Tetris Fall");
         GameEvents.InvokeLivesChanged();
     }
 

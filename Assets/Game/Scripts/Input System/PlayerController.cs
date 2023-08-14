@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputSystem input;
-
+    [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float snappingDistance = 0.1f;
     private bool gameOver;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(gameOver) return;
+        if(gameOver || _gameConfig.isPaused) return;
         input.ControlTetris(this.transform, snappingDistance);
     }
 

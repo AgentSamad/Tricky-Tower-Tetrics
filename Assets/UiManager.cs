@@ -102,12 +102,14 @@ public class UiManager : MonoBehaviour
             _gameConfig.isPaused = true;
             restartBtn.gameObject.SetActive(true);
             mainMenuBtn.gameObject.SetActive(true);
+            pausePannel.SetActive(true);
         }
         else
         {
             _gameConfig.isPaused = false;
             restartBtn.gameObject.SetActive(false);
             mainMenuBtn.gameObject.SetActive(false);
+            pausePannel.SetActive(false);
         }
     }
 

@@ -1324,6 +1324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 0b643e43108d5224d864672e536173ee, type: 2}
+  _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
   spawnPoint: {fileID: 1132787411}
   snappingDistance: 1
 --- !u!1 &1105206618
