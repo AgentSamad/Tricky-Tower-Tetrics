@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[CreateAssetMenu(fileName = "Player Input", menuName = "Game/Player Input")]
 public class PlayerInput : InputSystem
 {
     [SerializeField] private bool limitToScreenBounds;
@@ -12,7 +13,7 @@ public class PlayerInput : InputSystem
     private Vector2 touchEndPos;
     private const float minSwipeDistance = 50f;
 
-    void Start()
+    public override void Init()
     {
         mainCamera = Camera.main;
         screenBounds =
@@ -20,11 +21,11 @@ public class PlayerInput : InputSystem
     }
 
 
-    public override void ControlTetris(float snappingDistance)
+    public override void ControlTetris(Transform player, float snappingDistance)
     {
         mousePosition = Input.mousePosition;
         targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y,
-            transform.position.z - mainCamera.transform.position.z));
+            player.position.z - mainCamera.transform.position.z));
 
         // Snap the object's X position to the mouse position on the grid
         float snappedX = Mathf.Round(targetPosition.x / snappingDistance) * snappingDistance;
@@ -38,7 +39,7 @@ public class PlayerInput : InputSystem
             snappedX = Mathf.Clamp(snappedX, bounds.x, -bounds.x);
         }
 
-        transform.position = new Vector3(snappedX, transform.position.y, transform.position.z);
+        player.position = new Vector3(snappedX, player.position.y, player.position.z);
 
 
         DetectSwipe();
@@ -47,36 +48,24 @@ public class PlayerInput : InputSystem
 
     private void DetectSwipe()
     {
-        if (Input.touchCount > 0)
+        if (Input.GetMouseButtonDown(0))
         {
-            Touch touch = Input.GetTouch(0);
+            touchStartPos = Input.mousePosition;
+        }
 
-            switch (touch.phase)
+        if (Input.GetMouseButtonUp(0))
+        {
+            touchEndPos = Input.mousePosition;
+
+            float swipeDistance = Vector2.Distance(touchStartPos, touchEndPos);
+
+            if (swipeDistance > minSwipeDistance && (touchEndPos.y - touchStartPos.y) < 0)
             {
-                case TouchPhase.Began:
-                    touchStartPos = touch.position;
-                    break;
-
-                case TouchPhase.Ended:
-                    touchEndPos = touch.position;
-
-                    float swipeDistance = Vector2.Distance(touchStartPos, touchEndPos);
-
-                    if (swipeDistance > minSwipeDistance)
-                    {
-                        // Calculate the swipe direction
-                        Vector2 swipeDirection = touchEndPos - touchStartPos;
-
-                        // Check if it's a downward swipe
-                        if (swipeDirection.y < 0)
-                        {
-                            Debug.Log("Downward swipe detected!");
-                            // Perform your desired action here
-                        }
-                    }
-
-                    break;
+                // Perform your desired action here
+                GameEvents.TetrisDashInvoke();
             }
+
+            GameEvents.TetrisRotateInvoke();
         }
     }
 }

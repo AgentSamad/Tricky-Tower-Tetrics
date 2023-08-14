@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 716b20bfd49e8fa4697332156c1a3f45, type: 3}
-  m_Name: GameConfig
+  m_Script: {fileID: 11500000, guid: d060c2f076880234a912cb70b34566b1, type: 3}
+  m_Name: Ai Input
   m_EditorClassIdentifier: 
-  gameMode: 0
-  initialLives: 3
-  PieceSpeed: 4
-  DashSpeed: 3
-  isPaused: 0
+  bounds: {x: 0, y: 0}

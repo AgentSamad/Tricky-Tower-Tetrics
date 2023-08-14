@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Tetris : MonoBehaviour
 {
@@ -13,14 +14,33 @@ public class Tetris : MonoBehaviour
 
     private Rigidbody rb;
     private bool canMove;
-    public UnityEvent OnPiecePlaced;
+
+
+    [FormerlySerializedAs("OnPiecePlaced")]
+    public UnityEvent OnTetrisPlaced;
+
+    public UnityEvent OnTetrisFall;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         canMove = true;
+
+        GameEvents.OnTetrisRotate += Rotate;
+        GameEvents.OnTetrisDash += Dash;
     }
+
+    private void OnDisable()
+    {
+        GameEvents.OnTetrisRotate -= Rotate;
+        GameEvents.OnTetrisDash -= Dash;
+
+        OnTetrisPlaced.RemoveAllListeners();
+        OnTetrisFall.RemoveAllListeners();
+        print(" On disbale is calling");
+    }
+
 
     private void FixedUpdate()
     {
@@ -32,13 +52,13 @@ public class Tetris : MonoBehaviour
     {
         Vector3 movement = Vector3.down * (_gameConfig.PieceSpeed * Time.fixedDeltaTime);
         // Apply the movement to the Rigidbody in local space
-        rb.MovePosition(rb.position + transform.TransformDirection(movement));
+        rb.MovePosition(rb.position + movement);
     }
 
     public void Rotate()
     {
         if (!canMove || _gameConfig.isPaused) return;
-        transform.Rotate(new Vector3(0, 0, 90));
+        transform.Rotate(new Vector3(0, 0, 90), Space.Self);
     }
 
     public void Dash()
@@ -50,7 +70,9 @@ public class Tetris : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!canMove) return;
+        if (!canMove)
+            return;
+
         LayerMask otherColliderLayer = collision.gameObject.layer;
         if (filterLayers.Contains(otherColliderLayer))
         {
@@ -60,10 +82,26 @@ public class Tetris : MonoBehaviour
             rb.drag = 0.5f;
             rb.useGravity = true;
             transform.parent = null;
-            OnPiecePlaced.Invoke();
+            OnTetrisPlaced.Invoke();
         }
-        else
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print(other.gameObject.name);
+        if (other.CompareTag("Destroyer"))
         {
+            if (canMove)
+            {
+                OnTetrisPlaced?.Invoke();
+            }
+            else
+            {
+                OnTetrisFall.Invoke();
+            }
+
+
             Destroy(this.gameObject);
         }
     }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463065674352034546}
-  - component: {fileID: 463065674352034547}
   - component: {fileID: 463065674352034544}
   m_Layer: 0
   m_Name: AI
@@ -35,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &463065674352034547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463065674352034545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d060c2f076880234a912cb70b34566b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounds: {x: 0, y: 0}
 --- !u!114 &463065674352034544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370a0ef9f44be8745b327b4a4ba9c4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 463065674352034547}
+  input: {fileID: 11400000, guid: 76b49072522920d41b2a0bac7f3d7623, type: 2}
   spawnPoint: {fileID: 463065675074649086}
   snappingDistance: 1
 --- !u!1 &463065675074649087
