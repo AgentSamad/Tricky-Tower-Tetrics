@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7c9940630b624c8aa974ec2a52a75, type: 3}
+  m_Name: TetrisData 7
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7371931405288845901, guid: a943bdc685a87454780d91e88a4c3e32, type: 3}
+  icon: {fileID: 21300000, guid: cff2b3453d6429e43ab47ab97e6c4380, type: 3}
