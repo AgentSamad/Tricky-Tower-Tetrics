@@ -9,7 +9,10 @@ public class GameEvents
 
     public static Action OnGameStarted;
     public static Action OnGameOver;
-    public static Action OnLivesChanged;
+    public static Action OnGameWin;
+
+    public static Action<Participant> OnLivesChanged;
+    public static Action<Participant> OnHeightChanged;
 
     public static void TetrisRotateInvoke()
     {
@@ -19,6 +22,11 @@ public class GameEvents
     public static void TetrisDashInvoke()
     {
         OnTetrisDash?.Invoke();
+    }
+
+    public static void InvokeGameWin()
+    {
+        OnGameWin?.Invoke();
     }
 
     public static void InvokeGameOver()
@@ -31,9 +39,14 @@ public class GameEvents
         OnGameStarted?.Invoke();
     }
 
-    public static void InvokeLivesChanged()
+    public static void InvokeLivesChanged(Participant participant)
     {
-        OnLivesChanged?.Invoke();
+        OnLivesChanged?.Invoke(participant);
+    }
+
+    public static void InvokeHeightChanged(Participant participant)
+    {
+        OnHeightChanged?.Invoke(participant);
     }
 
     public static void InvokeNextTetrisImage(Sprite s)

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputSystem input;
     [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private Participant participant;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float snappingDistance = 0.1f;
     private bool gameOver;
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        TetrisSpawner.SpawnTetris?.Invoke(spawnPoint);
+        TetrisSpawner.SpawnTetris?.Invoke(spawnPoint,participant);
         GameEvents.OnGameOver += GameOver;
 
         if (TetrisSpawner.SpawnTetris == null)
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
         input.Init();
 
-        print("I am enabled");
+        //print("I am enabled");
     }
 
     private void OnDisable()

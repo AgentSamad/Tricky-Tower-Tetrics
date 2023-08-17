@@ -32,12 +32,15 @@ public class UiManager : MonoBehaviour
 
 
     private List<Image> spawnedHearts = new List<Image>();
-    private int currentLives;
+
+    public static Action<int> onDecreaseHearts;
+    public static Action<int> onHeightIncrease;
 
     void Awake()
     {
+        onDecreaseHearts += DecreaseUIHearts;
+        onHeightIncrease += IncreaseHeight;
         GameEvents.OnGameStarted += SetUI;
-        GameEvents.OnLivesChanged += SetLives;
         GameEvents.OnNextTetrisImage += SetNextTetris;
         GameEvents.OnGameOver += GameOver;
 
@@ -45,14 +48,15 @@ public class UiManager : MonoBehaviour
         restartBtn.onClick.AddListener(RestartButtonEvent);
         mainMenuBtn.onClick.AddListener(MainMenuButtonEvent);
 
-        currentLives = _gameConfig.initialLives;
+
         _gameConfig.isPaused = false;
     }
 
     private void OnDisable()
     {
+        onDecreaseHearts -= DecreaseUIHearts;
+        onHeightIncrease -= IncreaseHeight;
         GameEvents.OnGameStarted -= SetUI;
-        GameEvents.OnLivesChanged -= SetLives;
         GameEvents.OnNextTetrisImage -= SetNextTetris;
         GameEvents.OnGameOver -= GameOver;
 
@@ -77,22 +81,20 @@ public class UiManager : MonoBehaviour
     }
 
 
-    void SetLives()
+    void DecreaseUIHearts(int index)
     {
-        currentLives--;
-
-        if (currentLives <= 0)
-            GameEvents.InvokeGameOver();
-
-
-        int index = currentLives;
-
         if (index >= 0)
         {
             spawnedHearts[index].transform.DOScale(1.5f, 1f).SetEase(Ease.OutElastic);
             spawnedHearts[index].transform.DOScale(0f, 0.5f).SetEase(Ease.InOutElastic).SetDelay(0.5f);
             spawnedHearts[index].DOFade(0, 0.5f).SetDelay(1f);
         }
+    }
+
+    void IncreaseHeight(int height)
+    {
+        heightText.SetText($"{height}m");
+        heightText.transform.DOShakeScale(.4f, 1, 10, 90);
     }
 
     void PauseButtonEvent()

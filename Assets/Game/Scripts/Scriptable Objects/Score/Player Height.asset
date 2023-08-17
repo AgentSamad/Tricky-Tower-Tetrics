@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510b0dbafd731b24497d8f7124aa2a0f, type: 3}
-  m_Name: Player Input Multiplayer
+  m_Script: {fileID: 11500000, guid: bac888646a403f84282e067d9c00bb25, type: 3}
+  m_Name: Player Height
   m_EditorClassIdentifier: 
-  bounds: {x: 0, y: 0}
-  limitToScreenBounds: 1
+  value: 0

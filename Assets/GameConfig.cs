@@ -14,5 +14,6 @@ public class GameConfig : ScriptableObject
     public int initialLives = 3;
     public float PieceSpeed = 4;
     public float DashSpeed = 3;
+    public float maxHeightToWin = 40;
     public bool isPaused;
 }

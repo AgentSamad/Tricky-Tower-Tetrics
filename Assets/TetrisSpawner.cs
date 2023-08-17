@@ -16,7 +16,10 @@ public class TetrisSpawner : MonoBehaviour
 
 
     //Actions
-    public static Action<Transform> SpawnTetris;
+    public static Action<Transform, Participant> SpawnTetris;
+
+    public static List<Tetris> playerActiveTetris = new List<Tetris>();
+    public static List<Tetris> aiActiveTetris = new List<Tetris>();
 
     private void Awake()
     {
@@ -32,51 +35,78 @@ public class TetrisSpawner : MonoBehaviour
         GameEvents.OnGameOver -= GameOver;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
 
     private TetrisData GetRandomData()
     {
         var sortedIndex = Random.Range(0, tetrisBlocks.Count);
         var data = tetrisBlocks[sortedIndex];
         GameEvents.InvokeNextTetrisImage(data.icon);
-        // nextPieceSprite.value = data.icon;
-        // OnPieceSpawned.Raise();
         return data;
     }
+
+    private void AddTetris(Participant participant, Tetris tetris)
+    {
+        switch (participant)
+        {
+            case Participant.player:
+                playerActiveTetris.Add(tetris);
+                break;
+            case Participant.ai:
+                aiActiveTetris.Add(tetris);
+                break;
+        }
+    }
+
+    private void RemoveTetris(Participant participant, Tetris tetris)
+    {
+        switch (participant)
+        {
+            case Participant.player:
+                playerActiveTetris.Remove(tetris);
+                playerActiveTetris.TrimExcess();
+                break;
+            case Participant.ai:
+                aiActiveTetris.Remove(tetris);
+                aiActiveTetris.TrimExcess();
+                break;
+        }
+    }
+
 
     private void GameOver()
     {
         canSpawn = false;
     }
 
-    public void SpawnPiece(Transform spawnParent)
+    private void SpawnPiece(Transform spawnParent, Participant participant)
     {
         if (NextPieceData == null || !canSpawn || _gameConfig.isPaused) return;
-        StartCoroutine(Spawn(spawnParent));
+        StartCoroutine(Spawn(spawnParent, participant));
     }
 
 
-    public void TetrisFall()
+    public void OnTetrisFallHandler(Participant participant, Tetris tetris)
     {
-       // Debug.Log("Tetris Fall");
-        GameEvents.InvokeLivesChanged();
+        GameEvents.InvokeLivesChanged(participant);
+        RemoveTetris(participant, tetris);
     }
 
-    private IEnumerator Spawn(Transform spawnParent)
+    public void OnTetrisPlacedHandler(Transform spawnParent, Participant participant)
+    {
+        SpawnPiece(spawnParent, participant);
+        //also can calculate height
+        GameEvents.InvokeHeightChanged(participant);
+    }
+
+    private IEnumerator Spawn(Transform spawnParent, Participant participant)
     {
         //TODO: Play spawn VFX/particles
         yield return new WaitForSeconds(spawnDelay);
         var currentPieceData = NextPieceData;
-        Tetris pieceController = Instantiate(currentPieceData.prefab, spawnParent).GetComponent<Tetris>();
-
-        pieceController.OnTetrisPlaced.AddListener(() => { SpawnPiece(spawnParent); });
-        pieceController.OnTetrisFall.AddListener(TetrisFall);
-        //     .GetComponent<PieceController>();
-        // ActivePieces.AddNewPiece(pieceController);
+        Tetris tetris = Instantiate(currentPieceData.prefab, spawnParent).GetComponent<Tetris>();
+        tetris.OnTetrisPlaced.AddListener(() => OnTetrisPlacedHandler(spawnParent, participant));
+        tetris.OnTetrisFall.AddListener(() => OnTetrisFallHandler(participant, tetris));
+        AddTetris(participant, tetris);
         NextPieceData = GetRandomData();
     }
 }

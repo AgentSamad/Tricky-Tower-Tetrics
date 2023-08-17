@@ -9,16 +9,13 @@ public class Tetris : MonoBehaviour
 {
     [SerializeField] private GameConfig _gameConfig;
 
-    [Tooltip("Collision Layers to validate that a piece was placed")]
     public LayerMask filterLayers;
 
     private Rigidbody rb;
     private bool canMove;
 
 
-    [FormerlySerializedAs("OnPiecePlaced")]
     public UnityEvent OnTetrisPlaced;
-
     public UnityEvent OnTetrisFall;
 
     void Start()
@@ -66,6 +63,7 @@ public class Tetris : MonoBehaviour
         rb.AddForce(Vector3.down * _gameConfig.DashSpeed, ForceMode.Impulse);
     }
 
+  
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -88,7 +86,6 @@ public class Tetris : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.name);
         if (other.CompareTag("Destroyer"))
         {
             if (canMove)
