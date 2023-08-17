@@ -20,6 +20,7 @@ public class UiManager : MonoBehaviour
     [Header("Pannels")] [SerializeField] private GameObject gameplayPannel;
     [SerializeField] private GameObject pausePannel;
     [SerializeField] private GameObject gameOverPannel;
+    [SerializeField] private GameObject gameWinPannel;
     [SerializeField] private GameObject buttonsPannel;
 
     [Header("Buttons")] [SerializeField] private Button mainMenuBtn;
@@ -43,6 +44,7 @@ public class UiManager : MonoBehaviour
         GameEvents.OnGameStarted += SetUI;
         GameEvents.OnNextTetrisImage += SetNextTetris;
         GameEvents.OnGameOver += GameOver;
+        GameEvents.OnGameWin += GameWin;
 
         pauseBtn.onClick.AddListener(PauseButtonEvent);
         restartBtn.onClick.AddListener(RestartButtonEvent);
@@ -59,6 +61,7 @@ public class UiManager : MonoBehaviour
         GameEvents.OnGameStarted -= SetUI;
         GameEvents.OnNextTetrisImage -= SetNextTetris;
         GameEvents.OnGameOver -= GameOver;
+        GameEvents.OnGameWin -= GameWin;
 
         pauseBtn.onClick.RemoveAllListeners();
         restartBtn.onClick.RemoveAllListeners();
@@ -135,6 +138,15 @@ public class UiManager : MonoBehaviour
     {
         gameplayPannel.SetActive(false);
         gameOverPannel.SetActive(true);
+
+        restartBtn.gameObject.SetActive(true);
+        mainMenuBtn.gameObject.SetActive(true);
+    }
+
+    void GameWin()
+    {
+        gameplayPannel.SetActive(false);
+        gameWinPannel.SetActive(true);
 
         restartBtn.gameObject.SetActive(true);
         mainMenuBtn.gameObject.SetActive(true);

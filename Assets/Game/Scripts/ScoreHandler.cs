@@ -8,7 +8,9 @@ public class ScoreHandler : MonoBehaviour
     [SerializeField] private float highestHeightThreshould;
     [SerializeField] private IntValue playerHeight;
     [SerializeField] private IntValue aiHeight;
-    [SerializeField] private int heightMulitplayer=1;
+    [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private float heightMulitplayer = 1;
+
 
     private void Awake()
     {
@@ -26,9 +28,12 @@ public class ScoreHandler : MonoBehaviour
         int highestHeight = 0;
         foreach (var p in tetrisList)
         {
-            var pHeight = p.transform.GetColliderHighetsY();
-            if (pHeight > highestHeight)
-                highestHeight = pHeight;
+            if (p != null)
+            {
+                var pHeight = p.transform.GetColliderHighetsY();
+                if (pHeight > highestHeight)
+                    highestHeight = pHeight;
+            }
         }
 
         return highestHeight;
@@ -44,8 +49,7 @@ public class ScoreHandler : MonoBehaviour
             if (height > playerHeight.value + highestHeightThreshould)
             {
                 playerHeight.value = height;
-                print("Player Height" + height);
-                UiManager.onHeightIncrease?.Invoke(height * heightMulitplayer);
+                UiManager.onHeightIncrease?.Invoke((int)(height * heightMulitplayer));
             }
         }
 
@@ -57,6 +61,19 @@ public class ScoreHandler : MonoBehaviour
                 aiHeight.value = ai;
                 print("Ai Height" + ai);
             }
+        }
+
+
+        float tolerence = 0.2f;
+
+        if (Math.Abs(playerHeight.value - _gameConfig.maxHeightToWin) < tolerence)
+        {
+            GameEvents.InvokeGameWin();
+        }
+
+        if (Math.Abs(aiHeight.value - _gameConfig.maxHeightToWin) < tolerence)
+        {
+            GameEvents.InvokeGameOver();
         }
     }
 }

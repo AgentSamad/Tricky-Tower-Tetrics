@@ -10,10 +10,9 @@ public class TetrisSpawner : MonoBehaviour
     [SerializeField] private List<TetrisData> tetrisBlocks = new List<TetrisData>();
 
     [SerializeField] private GameConfig _gameConfig;
-    [SerializeField] private float spawnDelay = 1;
+    [SerializeField] private float spawnDelay = 0f;
     private TetrisData NextPieceData { get; set; }
     private bool canSpawn;
-
 
     //Actions
     public static Action<Transform, Participant> SpawnTetris;
@@ -24,7 +23,8 @@ public class TetrisSpawner : MonoBehaviour
     private void Awake()
     {
         SpawnTetris += SpawnPiece;
-        GameEvents.OnGameOver += GameOver;
+        GameEvents.OnGameOver += StopSpawning;
+        GameEvents.OnGameWin += StopSpawning;
         canSpawn = true;
         NextPieceData = GetRandomData();
     }
@@ -32,7 +32,8 @@ public class TetrisSpawner : MonoBehaviour
     private void OnDisable()
     {
         SpawnTetris -= SpawnPiece;
-        GameEvents.OnGameOver -= GameOver;
+        GameEvents.OnGameOver -= StopSpawning;
+        GameEvents.OnGameWin -= StopSpawning;
     }
 
 
@@ -73,7 +74,7 @@ public class TetrisSpawner : MonoBehaviour
     }
 
 
-    private void GameOver()
+    private void StopSpawning()
     {
         canSpawn = false;
     }
@@ -94,13 +95,14 @@ public class TetrisSpawner : MonoBehaviour
     public void OnTetrisPlacedHandler(Transform spawnParent, Participant participant)
     {
         SpawnPiece(spawnParent, participant);
-        //also can calculate height
+        //calculate height
         GameEvents.InvokeHeightChanged(participant);
     }
 
     private IEnumerator Spawn(Transform spawnParent, Participant participant)
     {
-        //TODO: Play spawn VFX/particles
+        //TODO: Dosomething
+
         yield return new WaitForSeconds(spawnDelay);
         var currentPieceData = NextPieceData;
         Tetris tetris = Instantiate(currentPieceData.prefab, spawnParent).GetComponent<Tetris>();

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d060c2f076880234a912cb70b34566b1, type: 3}
   m_Name: Ai Input
   m_EditorClassIdentifier: 
-  bounds: {x: 0, y: 0}
+  bounds: {x: 23, y: 29}

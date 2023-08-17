@@ -14,16 +14,18 @@ public class Tetris : MonoBehaviour
     private Rigidbody rb;
     private bool canMove;
 
-
+    private ParticleSystem vfxClouds;
     public UnityEvent OnTetrisPlaced;
     public UnityEvent OnTetrisFall;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        vfxClouds = GetComponentInChildren<ParticleSystem>();
         rb.useGravity = false;
         canMove = true;
 
+        vfxClouds.Play();
         GameEvents.OnTetrisRotate += Rotate;
         GameEvents.OnTetrisDash += Dash;
     }
@@ -63,7 +65,6 @@ public class Tetris : MonoBehaviour
         rb.AddForce(Vector3.down * _gameConfig.DashSpeed, ForceMode.Impulse);
     }
 
-  
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -80,6 +81,7 @@ public class Tetris : MonoBehaviour
             rb.useGravity = true;
             transform.parent = null;
             OnTetrisPlaced.Invoke();
+            vfxClouds.Play();
         }
     }
 

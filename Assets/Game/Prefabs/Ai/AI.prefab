@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463065674352034546}
   - component: {fileID: 463065674352034544}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 76b49072522920d41b2a0bac7f3d7623, type: 2}
+  _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
+  participant: 1
   spawnPoint: {fileID: 463065675074649086}
   snappingDistance: 1
 --- !u!1 &463065675074649087
@@ -58,7 +60,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463065675074649086}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +93,7 @@ GameObject:
   - component: {fileID: 463065675752993673}
   - component: {fileID: 463065675752993675}
   - component: {fileID: 463065675752993672}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +143,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 874e5d11be941ca44b478c3e8c1bba3c, type: 2}
+  - {fileID: 2100000, guid: c743385d9c93ee543be21dc06712f6b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
