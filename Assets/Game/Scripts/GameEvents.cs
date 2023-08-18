@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts;
 using UnityEngine;
 
 public class GameEvents

@@ -11,7 +11,7 @@ public class PlayerInput : InputSystem
 
     private Vector2 touchStartPos;
     private Vector2 touchEndPos;
-    private const float minSwipeDistance = 50f;
+    private const float minSwipeDistance = 1050f;
 
     public override void Init()
     {
@@ -64,8 +64,10 @@ public class PlayerInput : InputSystem
                 // Perform your desired action here
                 GameEvents.TetrisDashInvoke();
             }
-
-            GameEvents.TetrisRotateInvoke();
+            else
+            {
+                GameEvents.TetrisRotateInvoke();
+            }
         }
     }
 }

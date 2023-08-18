@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameConfig _gameConfig;
-
- 
-    private int playerLives, aiLives;
-
+    [SerializeField] private int playerLives, aiLives;
 
 
     private void Awake()

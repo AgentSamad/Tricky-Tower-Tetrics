@@ -650,6 +650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
+  playerLives: 0
+  aiLives: 0
 --- !u!114 &1706587481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +920,10 @@ PrefabInstance:
     - target: {fileID: 3487165323377886284, guid: f57f371976038d54aa9a501cc74ed84c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487165323377886287, guid: f57f371976038d54aa9a501cc74ed84c, type: 3}
+      propertyPath: field of view
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3487165323377886321, guid: f57f371976038d54aa9a501cc74ed84c, type: 3}
       propertyPath: m_Name

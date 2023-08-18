@@ -1244,7 +1244,7 @@ MonoBehaviour:
   restartBtn: {fileID: 8878997758438464777}
   pauseBtn: {fileID: 8878997759245912351}
   hearts: {fileID: 7523182089868271964, guid: 745589aa2314ab945bb8908444ac8e6f, type: 3}
-  _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
+  gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
 --- !u!1 &8878997758587582299
 GameObject:
   m_ObjectHideFlags: 0

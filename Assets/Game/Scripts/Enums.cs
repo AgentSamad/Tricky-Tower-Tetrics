@@ -1,6 +1,8 @@
-
-public enum Participant
+namespace Game.Scripts
 {
-    player,
-    ai
+    public enum Participant
+    {
+        player,
+        ai
+    }
 }

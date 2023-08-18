@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Search;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
@@ -29,7 +30,7 @@ public class UiManager : MonoBehaviour
     [Header("Prefabs")] [SerializeField] private GameObject hearts;
 
     [Header("Game Configurations")] [SerializeField]
-    private GameConfig _gameConfig;
+    private GameConfig gameConfig;
 
 
     private List<Image> spawnedHearts = new List<Image>();
@@ -51,7 +52,7 @@ public class UiManager : MonoBehaviour
         mainMenuBtn.onClick.AddListener(MainMenuButtonEvent);
 
 
-        _gameConfig.isPaused = false;
+        gameConfig.isPaused = false;
     }
 
     private void OnDisable()
@@ -77,7 +78,7 @@ public class UiManager : MonoBehaviour
 
     void SpawnHearts()
     {
-        for (int i = 0; i < _gameConfig.initialLives; i++)
+        for (int i = 0; i < gameConfig.initialLives; i++)
         {
             spawnedHearts.Add(Instantiate(hearts, livesParent).GetComponent<Image>());
         }
@@ -102,16 +103,16 @@ public class UiManager : MonoBehaviour
 
     void PauseButtonEvent()
     {
-        if (!_gameConfig.isPaused)
+        if (!gameConfig.isPaused)
         {
-            _gameConfig.isPaused = true;
+            gameConfig.isPaused = true;
             restartBtn.gameObject.SetActive(true);
             mainMenuBtn.gameObject.SetActive(true);
             pausePannel.SetActive(true);
         }
         else
         {
-            _gameConfig.isPaused = false;
+            gameConfig.isPaused = false;
             restartBtn.gameObject.SetActive(false);
             mainMenuBtn.gameObject.SetActive(false);
             pausePannel.SetActive(false);
