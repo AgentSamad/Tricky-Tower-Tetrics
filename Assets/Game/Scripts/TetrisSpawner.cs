@@ -95,6 +95,7 @@ public class TetrisSpawner : MonoBehaviour
     public void OnTetrisPlacedHandler(Transform spawnParent, Participant participant)
     {
         SpawnPiece(spawnParent, participant);
+        
         //calculate height
         GameEvents.InvokeHeightChanged(participant);
     }

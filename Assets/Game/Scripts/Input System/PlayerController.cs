@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
         input.Init();
 
-        //print("I am enabled");
+      //  print("I am enabled");
     }
 
     private void OnDisable()
