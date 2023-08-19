@@ -5,4 +5,11 @@ namespace Game.Scripts
         player,
         ai
     }
+
+    public enum GameState
+    {
+        Playing,
+        Win,
+        Lose
+    }
 }

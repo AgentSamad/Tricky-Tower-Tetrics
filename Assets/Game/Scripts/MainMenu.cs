@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Button singlePlayerButton;
     [SerializeField] private Button multiplayerButton;
-
+    [SerializeField] private GameConfig _gameConfig;
 
     private void OnEnable()
     {
@@ -26,11 +26,13 @@ public class MainMenu : MonoBehaviour
     private void OnSoloModePressed()
     {
         StartCoroutine(LoadingSceneAsync("Soloplayer"));
+        _gameConfig.gameMode = GameConfig.GameMode.Solo;
     }
 
     private void OnVersusModePressed()
     {
         StartCoroutine(LoadingSceneAsync("Multiplayer"));
+        _gameConfig.gameMode = GameConfig.GameMode.Multiplayer;
     }
 
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 0
   initialLives: 3
-  PieceSpeed: 4
-  DashSpeed: 3
+  PieceSpeed: 3
+  DashSpeed: 4
   maxHeightToWin: 40
   isPaused: 0

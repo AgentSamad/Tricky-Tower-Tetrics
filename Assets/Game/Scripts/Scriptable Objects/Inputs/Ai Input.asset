@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Ai Input
   m_EditorClassIdentifier: 
   bounds: {x: 23, y: 29}
+  movementSpeed: 3
+  waitTime: 1.5

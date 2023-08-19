@@ -7,16 +7,18 @@ using UnityEngine;
 public class ScoreHandler : MonoBehaviour
 {
     [SerializeField] private float highestHeightThreshould;
-    [SerializeField] private IntValue playerHeight;
-    [SerializeField] private IntValue aiHeight;
+    [SerializeField] private int playerHeight;
+    [SerializeField] private int aiHeight;
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private float heightMulitplayer = 1;
 
+    private GameManager gameManager;
 
     private void Awake()
     {
-        playerHeight.value = aiHeight.value = 0;
+        playerHeight = aiHeight = 0;
         GameEvents.OnHeightChanged += CalculateHeight;
+        gameManager = GetComponent<GameManager>();
     }
 
     private void OnDisable()
@@ -47,9 +49,9 @@ public class ScoreHandler : MonoBehaviour
         {
             var height = GetHighestActivePiece(TetrisSpawner.playerActiveTetris);
 
-            if (height > playerHeight.value + highestHeightThreshould)
+            if (height > playerHeight + highestHeightThreshould)
             {
-                playerHeight.value = height;
+                playerHeight = height;
                 UiManager.onHeightIncrease?.Invoke((int)(height * heightMulitplayer));
             }
         }
@@ -57,24 +59,26 @@ public class ScoreHandler : MonoBehaviour
         else
         {
             var ai = GetHighestActivePiece(TetrisSpawner.aiActiveTetris);
-            if (ai > aiHeight.value + highestHeightThreshould)
+            if (ai > aiHeight + highestHeightThreshould)
             {
-                aiHeight.value = ai;
-                print("Ai Height" + ai);
+                aiHeight = ai;
+                print("Ai Height " + ai);
             }
         }
 
 
         float tolerence = 0.2f;
 
-        if (Math.Abs(playerHeight.value - _gameConfig.maxHeightToWin) < tolerence)
+        if (Math.Abs(playerHeight - _gameConfig.maxHeightToWin) < tolerence)
         {
-            GameEvents.InvokeGameWin();
+            if (gameManager.GetState() == GameState.Playing)
+                GameEvents.InvokeGameWin();
         }
 
-        if (Math.Abs(aiHeight.value - _gameConfig.maxHeightToWin) < tolerence)
+        if (Math.Abs(aiHeight - _gameConfig.maxHeightToWin) < tolerence)
         {
-            GameEvents.InvokeGameOver();
+            if (gameManager.GetState() == GameState.Playing)
+                GameEvents.InvokeGameOver();
         }
     }
 }

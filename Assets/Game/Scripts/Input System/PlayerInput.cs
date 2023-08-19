@@ -11,7 +11,7 @@ public class PlayerInput : InputSystem
 
     private Vector2 touchStartPos;
     private Vector2 touchEndPos;
-    private const float minSwipeDistance = 1050f;
+  [SerializeField]  private  float minSwipeDistance = 700f;
 
     public override void Init()
     {

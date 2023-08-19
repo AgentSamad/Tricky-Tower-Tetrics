@@ -407,6 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singlePlayerButton: {fileID: 1866228742}
   multiplayerButton: {fileID: 2034920655}
+  _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
