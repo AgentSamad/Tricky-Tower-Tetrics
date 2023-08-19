@@ -490,7 +490,7 @@ MonoBehaviour:
   _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
   participant: 0
   spawnPoint: {fileID: 1132787411}
-  snappingDistance: 1
+  snappingDistance: 0.1
 --- !u!1 &1132787410
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,9 +717,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a636ef4291163459014ea37ce8fd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameState: 0
   _gameConfig: {fileID: 11400000, guid: ed6d80455f0c8ec4e88cdfc6d42f3e81, type: 2}
-  playerLives: 0
-  aiLives: 0
 --- !u!114 &1706587481
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -62,7 +62,7 @@ public class ScoreHandler : MonoBehaviour
             if (ai > aiHeight + highestHeightThreshould)
             {
                 aiHeight = ai;
-                print("Ai Height " + ai);
+              //  print("Ai Height " + ai);
             }
         }
 
