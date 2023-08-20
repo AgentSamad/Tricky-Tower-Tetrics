@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Search;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour

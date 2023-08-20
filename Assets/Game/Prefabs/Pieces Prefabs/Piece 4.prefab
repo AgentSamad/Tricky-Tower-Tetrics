@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColorId: _Color
-  color: {r: 0.21391487, g: 0.8018868, b: 0.10137058, a: 0}
+  color: {r: 0.38837758, g: 0.4811321, b: 0.29231045, a: 1}
   materialIndex: 0
 --- !u!1001 &6018829996439448917
 PrefabInstance:

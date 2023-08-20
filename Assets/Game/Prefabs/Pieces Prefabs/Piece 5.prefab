@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColorId: _Color
-  color: {r: 0.29803923, g: 0.8392157, b: 0.72156864, a: 0}
+  color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   materialIndex: 0
 --- !u!4 &4174868552924544894 stripped
 Transform:

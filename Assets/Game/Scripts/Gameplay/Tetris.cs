@@ -36,7 +36,7 @@ public class Tetris : MonoBehaviour
         }
 
         vfxClouds.Play();
-        rb.useGravity = false;
+        ResetRigidBody();
         targetRotation = transform.rotation;
     }
 
@@ -116,7 +116,8 @@ public class Tetris : MonoBehaviour
         if (filterLayers.Contains(otherColliderLayer))
         {
             canMove = false;
-            rb.drag = 0.5f;
+            rb.drag = 1f;
+            rb.angularDrag = 0.5f;
             rb.useGravity = true;
             transform.parent = null;
             OnTetrisPlaced.Invoke();
@@ -124,6 +125,13 @@ public class Tetris : MonoBehaviour
         }
     }
 
+
+    void ResetRigidBody()
+    {
+        rb.drag = 0f;
+        rb.angularDrag = 0;
+        rb.useGravity = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
