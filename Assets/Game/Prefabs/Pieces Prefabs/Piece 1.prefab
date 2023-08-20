@@ -243,3 +243,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 88868ea93033bd14aaa28a5cb4de21bc, type: 3}
   m_PrefabInstance: {fileID: 7371931406703752005}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7371931406703719909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 88868ea93033bd14aaa28a5cb4de21bc, type: 3}
+  m_PrefabInstance: {fileID: 7371931406703752005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8606772540895157495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371931406703719909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b0cb639cc50c343bb1e4a8c9459183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColorId: _Color
+  color: {r: 0.8679245, g: 0.22435024, b: 0.22435024, a: 0}
+  materialIndex: 0

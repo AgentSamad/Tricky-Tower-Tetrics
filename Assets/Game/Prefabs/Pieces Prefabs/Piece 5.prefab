@@ -237,13 +237,33 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: afa42c20aa9d89840abe16b10afe1011, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f98bac2d120a2c4488c23baf7bbb8765, type: 2}
+      objectReference: {fileID: 2100000, guid: 12118ec85137a2445a7a96eb9fd28567, type: 2}
     - target: {fileID: 2300000, guid: afa42c20aa9d89840abe16b10afe1011, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: f98bac2d120a2c4488c23baf7bbb8765, type: 2}
+      objectReference: {fileID: 2100000, guid: 12118ec85137a2445a7a96eb9fd28567, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afa42c20aa9d89840abe16b10afe1011, type: 3}
+--- !u!1 &4174868552924504926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: afa42c20aa9d89840abe16b10afe1011, type: 3}
+  m_PrefabInstance: {fileID: 4174868552924407294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1639900482893081014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174868552924504926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b0cb639cc50c343bb1e4a8c9459183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColorId: _Color
+  color: {r: 0.29803923, g: 0.8392157, b: 0.72156864, a: 0}
+  materialIndex: 0
 --- !u!4 &4174868552924544894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: afa42c20aa9d89840abe16b10afe1011, type: 3}

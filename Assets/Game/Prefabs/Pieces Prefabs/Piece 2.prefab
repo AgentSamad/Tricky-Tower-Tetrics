@@ -183,11 +183,11 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 2b2dbf4e2c5867d41aa8a6484995aa09, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 78e93936bf7bc264881128c0bee6170d, type: 2}
+      objectReference: {fileID: 2100000, guid: 12118ec85137a2445a7a96eb9fd28567, type: 2}
     - target: {fileID: 2300000, guid: 2b2dbf4e2c5867d41aa8a6484995aa09, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 78e93936bf7bc264881128c0bee6170d, type: 2}
+      objectReference: {fileID: 2100000, guid: 12118ec85137a2445a7a96eb9fd28567, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b2dbf4e2c5867d41aa8a6484995aa09, type: 3}
 --- !u!4 &1049386331337193913 stripped
@@ -195,6 +195,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2b2dbf4e2c5867d41aa8a6484995aa09, type: 3}
   m_PrefabInstance: {fileID: 1049386331337581369}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1049386331337614745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 2b2dbf4e2c5867d41aa8a6484995aa09, type: 3}
+  m_PrefabInstance: {fileID: 1049386331337581369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6919661154214588199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049386331337614745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b0cb639cc50c343bb1e4a8c9459183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColorId: _Color
+  color: {r: 0.2729441, g: 0.36081034, b: 0.7735849, a: 0}
+  materialIndex: 0
 --- !u!1001 &6349718822243087310
 PrefabInstance:
   m_ObjectHideFlags: 0
