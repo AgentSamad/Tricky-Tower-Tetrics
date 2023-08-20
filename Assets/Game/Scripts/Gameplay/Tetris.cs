@@ -20,7 +20,8 @@ public class Tetris : MonoBehaviour
     public UnityEvent OnTetrisFall;
     private int id;
     private Participant mySpawner;
-
+    private bool isRotating;
+    private Quaternion targetRotation;
 
     private void OnEnable()
     {
@@ -36,6 +37,7 @@ public class Tetris : MonoBehaviour
 
         vfxClouds.Play();
         rb.useGravity = false;
+        targetRotation = transform.rotation;
     }
 
     private void OnDisable()
@@ -48,11 +50,28 @@ public class Tetris : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (isRotating)
+        {
+            Quaternion startRotation = transform.rotation;
+            float step = _gameConfig.PieceRotateSpeed * Time.deltaTime; // Adjust speed for 90-degree rotation
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, step);
+
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
+            {
+                // Stop rotating when close to target rotation
+                isRotating = false;
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!canMove || _gameConfig.isPaused) return;
         VerticalMove();
     }
+
 
     private void VerticalMove()
     {
@@ -63,8 +82,12 @@ public class Tetris : MonoBehaviour
 
     public void Rotate(Participant p)
     {
-        if (!canMove || _gameConfig.isPaused || p != mySpawner) return;
-        transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+        if (!canMove || _gameConfig.isPaused || p != mySpawner || isRotating) return;
+        {
+            isRotating = true;
+            targetRotation *= Quaternion.Euler(0, 0, 90);
+        }
+        //transform.Rotate(new Vector3(0, 0, 90), Space.Self);
     }
 
     public void Dash(Participant p)
