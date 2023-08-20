@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using UnityEngine;
 
 public class InputSystem : ScriptableObject
@@ -11,7 +12,7 @@ public class InputSystem : ScriptableObject
     {
     }
 
-    public virtual void ControlTetris(Transform player, float snappingDistance)
+    public virtual void ControlTetris(Transform player, float snappingDistance, Participant p)
     {
     }
 }

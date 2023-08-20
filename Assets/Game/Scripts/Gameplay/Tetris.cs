@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -17,17 +18,24 @@ public class Tetris : MonoBehaviour
     private ParticleSystem vfxClouds;
     public UnityEvent OnTetrisPlaced;
     public UnityEvent OnTetrisFall;
+    private int id;
+    private Participant mySpawner;
 
-    void Start()
+
+    private void OnEnable()
     {
-        rb = GetComponent<Rigidbody>();
-        vfxClouds = GetComponentInChildren<ParticleSystem>();
-        rb.useGravity = false;
-        canMove = true;
-
-        vfxClouds.Play();
         GameEvents.OnTetrisRotate += Rotate;
         GameEvents.OnTetrisDash += Dash;
+        canMove = true;
+
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            vfxClouds = GetComponentInChildren<ParticleSystem>();
+        }
+
+        vfxClouds.Play();
+        rb.useGravity = false;
     }
 
     private void OnDisable()
@@ -53,18 +61,28 @@ public class Tetris : MonoBehaviour
         rb.MovePosition(rb.position + movement);
     }
 
-    public void Rotate()
+    public void Rotate(Participant p)
     {
-        if (!canMove || _gameConfig.isPaused) return;
+        if (!canMove || _gameConfig.isPaused || p != mySpawner) return;
         transform.Rotate(new Vector3(0, 0, 90), Space.Self);
     }
 
-    public void Dash()
+    public void Dash(Participant p)
     {
-        if (!canMove || _gameConfig.isPaused) return;
+        if (!canMove || _gameConfig.isPaused || p != mySpawner) return;
         rb.AddForce(Vector3.down * _gameConfig.DashSpeed, ForceMode.Impulse);
     }
 
+    public void SetData(int myId, Participant spawner)
+    {
+        id = myId;
+        mySpawner = spawner;
+    }
+
+    public int GetId()
+    {
+        return id;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -74,8 +92,6 @@ public class Tetris : MonoBehaviour
         LayerMask otherColliderLayer = collision.gameObject.layer;
         if (filterLayers.Contains(otherColliderLayer))
         {
-            StopAllCoroutines();
-
             canMove = false;
             rb.drag = 0.5f;
             rb.useGravity = true;
@@ -92,15 +108,11 @@ public class Tetris : MonoBehaviour
         {
             if (canMove)
             {
-                OnTetrisPlaced?.Invoke();
-            }
-            else
-            {
-                OnTetrisFall.Invoke();
+                OnTetrisPlaced.Invoke();
             }
 
-
-            Destroy(this.gameObject);
+            OnTetrisFall.Invoke();
+            this.gameObject.SetActive(false);
         }
     }
 }

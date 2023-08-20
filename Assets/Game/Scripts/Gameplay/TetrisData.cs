@@ -7,4 +7,5 @@ public class TetrisData : ScriptableObject
 {
     public GameObject prefab;
     public Sprite icon;
+    public int id;
 }

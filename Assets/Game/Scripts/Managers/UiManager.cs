@@ -150,6 +150,7 @@ public class UiManager : MonoBehaviour
 
         restartBtn.gameObject.SetActive(true);
         mainMenuBtn.gameObject.SetActive(true);
+        pauseBtn.gameObject.SetActive(false);
     }
 
     void GameWin()
@@ -160,6 +161,7 @@ public class UiManager : MonoBehaviour
 
         restartBtn.gameObject.SetActive(true);
         mainMenuBtn.gameObject.SetActive(true);
+        pauseBtn.gameObject.SetActive(false);
 
         confetti.Play();
     }

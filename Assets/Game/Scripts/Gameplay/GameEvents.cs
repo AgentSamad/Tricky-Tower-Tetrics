@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameEvents
 {
-    public static Action OnTetrisRotate;
-    public static Action OnTetrisDash;
+    public static Action<Participant> OnTetrisRotate;
+    public static Action<Participant> OnTetrisDash;
     public static Action<Sprite> OnNextTetrisImage;
 
     public static Action OnGameStarted;
@@ -15,14 +15,14 @@ public class GameEvents
     public static Action<Participant> OnLivesChanged;
     public static Action<Participant> OnHeightChanged;
 
-    public static void TetrisRotateInvoke()
+    public static void TetrisRotateInvoke(Participant p)
     {
-        OnTetrisRotate?.Invoke();
+        OnTetrisRotate?.Invoke(p);
     }
 
-    public static void TetrisDashInvoke()
+    public static void TetrisDashInvoke(Participant p)
     {
-        OnTetrisDash?.Invoke();
+        OnTetrisDash?.Invoke(p);
     }
 
     public static void InvokeGameWin()

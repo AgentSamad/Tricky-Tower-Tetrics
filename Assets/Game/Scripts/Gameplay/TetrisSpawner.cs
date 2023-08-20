@@ -11,6 +11,8 @@ public class TetrisSpawner : MonoBehaviour
 
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private float spawnDelay = 0f;
+    [SerializeField] private int initialPoolSize;
+    private Dictionary<int, Queue<GameObject>> tetrisDataPool = new Dictionary<int, Queue<GameObject>>();
     private TetrisData NextPieceData { get; set; }
     private bool canSpawn;
 
@@ -25,9 +27,17 @@ public class TetrisSpawner : MonoBehaviour
         SpawnTetris += SpawnPiece;
         GameEvents.OnGameOver += StopSpawning;
         GameEvents.OnGameWin += StopSpawning;
+
+        // Initialize the pool for each type of TetrisData.
+        foreach (var tetrisDataPrefab in tetrisBlocks)
+        {
+            CreateTetrisDataPool(tetrisDataPrefab);
+        }
+
         canSpawn = true;
         NextPieceData = GetRandomData();
     }
+
 
     private void OnDisable()
     {
@@ -73,6 +83,7 @@ public class TetrisSpawner : MonoBehaviour
         }
     }
 
+    #region Spawning
 
     private void StopSpawning()
     {
@@ -85,31 +96,89 @@ public class TetrisSpawner : MonoBehaviour
         StartCoroutine(Spawn(spawnParent, participant));
     }
 
-
-    public void OnTetrisFallHandler(Participant participant, Tetris tetris)
-    {
-        GameEvents.InvokeLivesChanged(participant);
-        RemoveTetris(participant, tetris);
-    }
-
-    public void OnTetrisPlacedHandler(Transform spawnParent, Participant participant)
-    {
-        SpawnPiece(spawnParent, participant);
-        
-        //calculate height
-        GameEvents.InvokeHeightChanged(participant);
-    }
-
     private IEnumerator Spawn(Transform spawnParent, Participant participant)
     {
         //TODO: Dosomething
 
         yield return new WaitForSeconds(spawnDelay);
         var currentPieceData = NextPieceData;
-        Tetris tetris = Instantiate(currentPieceData.prefab, spawnParent).GetComponent<Tetris>();
+        Tetris tetris = GetTetrisData(currentPieceData.id, spawnParent).GetComponent<Tetris>();
+
+        //SetData
+        tetris.SetData(currentPieceData.id, participant);
         tetris.OnTetrisPlaced.AddListener(() => OnTetrisPlacedHandler(spawnParent, participant));
         tetris.OnTetrisFall.AddListener(() => OnTetrisFallHandler(participant, tetris));
         AddTetris(participant, tetris);
         NextPieceData = GetRandomData();
     }
+
+    #endregion
+
+    #region Events
+
+    public void OnTetrisFallHandler(Participant participant, Tetris tetris)
+    {
+        GameEvents.InvokeLivesChanged(participant);
+        RemoveTetris(participant, tetris);
+        ReturnTetrisDataToPool(tetris.GetId(), tetris.gameObject);
+    }
+
+    public void OnTetrisPlacedHandler(Transform spawnParent, Participant participant)
+    {
+        SpawnPiece(spawnParent, participant);
+
+        //calculate height
+        GameEvents.InvokeHeightChanged(participant);
+    }
+
+    #endregion
+
+
+    #region Pooling
+
+    private void CreateTetrisDataPool(TetrisData tetrisData)
+    {
+        int key = tetrisData.id;
+        string name = tetrisData.prefab.name;
+
+        if (!tetrisDataPool.ContainsKey(key))
+        {
+            tetrisDataPool[key] = new Queue<GameObject>();
+        }
+
+        //Fly Weight
+        var runtimeObject = Instantiate(tetrisData.prefab, this.transform);
+        runtimeObject.name = $"{name} {1}";
+
+        //clone objects
+
+        for (int i = 0; i < initialPoolSize - 1; i++)
+        {
+            runtimeObject = Instantiate(runtimeObject, this.transform);
+            runtimeObject.name = $"{name} {i + 2}";
+            tetrisDataPool[key].Enqueue(runtimeObject);
+        }
+    }
+
+    public GameObject GetTetrisData(int key, Transform newParent)
+    {
+        if (tetrisDataPool.ContainsKey(key) && tetrisDataPool[key].Count > 0)
+        {
+            GameObject tetris = tetrisDataPool[key].Dequeue();
+            tetris.transform.SetParent(newParent, false);
+            tetris.SetActive(true);
+            return tetris;
+        }
+
+        return null; // No available objects in the pool.
+    }
+
+
+    public void ReturnTetrisDataToPool(int key, GameObject tetris)
+    {
+        tetris.transform.SetParent(this.transform, false);
+        tetrisDataPool[key].Enqueue(tetris);
+    }
+
+    #endregion
 }

@@ -1,3 +1,4 @@
+using Game.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,7 +24,7 @@ public class PlayerInput : InputSystem
     }
 
 
-    public override void ControlTetris(Transform player, float snappingDistance)
+    public override void ControlTetris(Transform player, float snappingDistance, Participant p)
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -64,16 +65,16 @@ public class PlayerInput : InputSystem
 
             float swipeDistance = touchStart_A.y - touchEnd_A.y; // Vector2.Distance(touchStart_A, touchEnd_A);
 
-          //  Debug.Log(swipeDistance);
+            //  Debug.Log(swipeDistance);
             if (swipeDistance > minSwipeDistance)
             {
                 // Perform your desired action here
-                GameEvents.TetrisDashInvoke();
-           //     Debug.Log("Dash");
+                GameEvents.TetrisDashInvoke(p);
+                //     Debug.Log("Dash");
             }
             else if (swipeDistance <= 0)
             {
-                GameEvents.TetrisRotateInvoke();
+                GameEvents.TetrisRotateInvoke(p);
             }
         }
     }

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        TetrisSpawner.SpawnTetris?.Invoke(spawnPoint,participant);
+        TetrisSpawner.SpawnTetris?.Invoke(spawnPoint, participant);
         GameEvents.OnGameOver += StopMoving;
         GameEvents.OnGameWin += StopMoving;
 
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
         input.Init();
 
-      //  print("I am enabled");
+        //  print("I am enabled");
     }
 
     private void OnDisable()
@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(gameOver || _gameConfig.isPaused) return;
-        input.ControlTetris(this.transform, snappingDistance);
+        if (gameOver || _gameConfig.isPaused) return;
+        input.ControlTetris(this.transform, snappingDistance, participant);
     }
 
     void StopMoving()

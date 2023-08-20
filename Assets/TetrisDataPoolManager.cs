@@ -28,7 +28,7 @@ public class TetrisDataPoolManager : MonoBehaviour
 
         for (int i = 0; i < initialPoolSize; i++)
         {
-            GameObject newTetrisData = Instantiate(prefab);
+            GameObject newTetrisData = Instantiate(prefab, this.transform);
             newTetrisData.SetActive(false);
             tetrisDataPool[key].Enqueue(newTetrisData);
         }
@@ -46,8 +46,10 @@ public class TetrisDataPoolManager : MonoBehaviour
         return null; // No available objects in the pool.
     }
 
+
     public void ReturnTetrisDataToPool(string key, GameObject tetris)
     {
+        tetris.transform.SetParent(this.transform);
         tetris.SetActive(false);
         tetrisDataPool[key].Enqueue(tetris);
     }
