@@ -12,7 +12,7 @@ public class AiInput : InputSystem
     private bool isMoving = false;
     private Vector3 targetPosition;
 
-    public override void ControlTetris(Transform player, float snappingDistance, Participant p)
+    public override void ControlTetris(Transform player, Participant p)
     {
         timeSinceLastMove += Time.deltaTime;
 
@@ -33,7 +33,7 @@ public class AiInput : InputSystem
                 isMoving = false;
                 timeSinceLastMove = 0f;
 
-                if (Random.value > 0.4f) GameEvents.TetrisRotateInvoke(p);
+                if (Random.value >= 0.6f) GameEvents.TetrisRotateInvoke(p);
             }
         }
     }

@@ -86,6 +86,9 @@ public class Tetris : MonoBehaviour
         {
             isRotating = true;
             targetRotation *= Quaternion.Euler(0, 0, 90);
+
+            if (mySpawner == Participant.player)
+                Vibration.VibratePop();
         }
         //transform.Rotate(new Vector3(0, 0, 90), Space.Self);
     }
@@ -122,6 +125,8 @@ public class Tetris : MonoBehaviour
             transform.parent = null;
             OnTetrisPlaced.Invoke();
             vfxClouds.Play();
+            if (mySpawner == Participant.player)
+                Vibration.VibrateLight();
         }
     }
 
@@ -143,6 +148,10 @@ public class Tetris : MonoBehaviour
             }
 
             OnTetrisFall.Invoke();
+
+            if (mySpawner == Participant.player)
+                Vibration.VibrateHeavy();
+
             this.gameObject.SetActive(false);
         }
     }

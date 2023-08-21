@@ -19,8 +19,8 @@ public class TetrisSpawner : MonoBehaviour
     //Actions
     public static Action<Transform, Participant> SpawnTetris;
 
-    public static List<Tetris> playerActiveTetris = new List<Tetris>();
-    public static List<Tetris> aiActiveTetris = new List<Tetris>();
+    public static List<Tetris> playerActiveTetris { get; } = new List<Tetris>();
+    public static List<Tetris> aiActiveTetris { get; } = new List<Tetris>();
 
     private void Awake()
     {
@@ -29,13 +29,12 @@ public class TetrisSpawner : MonoBehaviour
         GameEvents.OnGameWin += StopSpawning;
 
         // Initialize the pool for each type of TetrisData.
-        foreach (var tetrisDataPrefab in tetrisBlocks)
-        {
-            CreateTetrisDataPool(tetrisDataPrefab);
-        }
+        InitializePool();
 
         canSpawn = true;
         NextPieceData = GetRandomData();
+
+      
     }
 
 
@@ -136,6 +135,14 @@ public class TetrisSpawner : MonoBehaviour
 
     #region Pooling
 
+    private void InitializePool()
+    {
+        foreach (var tetrisDataPrefab in tetrisBlocks)
+        {
+            CreateTetrisDataPool(tetrisDataPrefab);
+        }
+    }
+
     private void CreateTetrisDataPool(TetrisData tetrisData)
     {
         int key = tetrisData.id;
@@ -169,6 +176,7 @@ public class TetrisSpawner : MonoBehaviour
             tetris.SetActive(true);
             return tetris;
         }
+
 
         return null; // No available objects in the pool.
     }

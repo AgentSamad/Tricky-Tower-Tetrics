@@ -63,6 +63,9 @@ public class GameManager : MonoBehaviour
     void GameStarted()
     {
         _gameState = GameState.Playing;
+
+        //Vibration
+        Vibration.Init();
     }
 
     void GameWin()

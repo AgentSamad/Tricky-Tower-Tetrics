@@ -24,7 +24,7 @@ public class PlayerInput : InputSystem
     }
 
 
-    public override void ControlTetris(Transform player, float snappingDistance, Participant p)
+    public override void ControlTetris(Transform player, Participant p)
     {
         if (Input.GetMouseButtonDown(0))
         {

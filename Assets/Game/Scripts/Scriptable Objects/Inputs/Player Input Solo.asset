@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Player Input Solo
   m_EditorClassIdentifier: 
   bounds: {x: 0, y: 0}
+  snappingDistance: 0.1
   limitToScreenBounds: 1
   minSwipeDistance: 400

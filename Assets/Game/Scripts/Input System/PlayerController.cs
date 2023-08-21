@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private Participant participant;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private float snappingDistance = 0.1f;
     private bool gameOver;
 
 
@@ -37,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (gameOver || _gameConfig.isPaused) return;
-        input.ControlTetris(this.transform, snappingDistance, participant);
+        input.ControlTetris(this.transform, participant);
     }
 
     void StopMoving()

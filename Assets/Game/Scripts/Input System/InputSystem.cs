@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using Game.Scripts;
 using UnityEngine;
 
-public class InputSystem : ScriptableObject
+public abstract class InputSystem : ScriptableObject
 {
     public Vector2 bounds;
-
+    public float snappingDistance;
 
     public virtual void Init()
     {
     }
 
-    public virtual void ControlTetris(Transform player, float snappingDistance, Participant p)
+    public virtual void ControlTetris(Transform player, Participant p)
     {
     }
 }

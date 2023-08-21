@@ -7,11 +7,11 @@ using UnityEngine;
 public class ScoreHandler : MonoBehaviour
 {
     [SerializeField] private float highestHeightThreshould;
-    [SerializeField] private int playerHeight;
-    [SerializeField] private int aiHeight;
+
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private float heightMulitplayer = 1;
 
+    private int playerHeight, aiHeight;
     private GameManager gameManager;
 
     private void Awake()
@@ -62,7 +62,7 @@ public class ScoreHandler : MonoBehaviour
             if (ai > aiHeight + highestHeightThreshould)
             {
                 aiHeight = ai;
-              //  print("Ai Height " + ai);
+                //  print("Ai Height " + ai);
             }
         }
 
