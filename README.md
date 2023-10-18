@@ -2,7 +2,7 @@
 ## Tricky Towers Mobile Version
 
 ### Introduction
-As per guidelines this project is a light clone of “Tricky Towers”. It has 2 modes of gameplay one is single and other is multiplayer. In the single player mode the user has to make the highest tower without wasting the lives, as per instructions  the default target height is 40 and default lives are 3. In the multiplayer mode there is an Ai that is moving randomly left and right and building its tower, it is displayed on the left side of the screen, if the Ai achieves the target before the player within the defined lives , it will win and the player will lose. Have used the clean code with event based system &  SOLID principles 
+As per guidelines this project is a light clone of “Tricky Towers”. It has 2 modes of gameplay one is single and other is multiplayer. In the single player mode the user has to make the highest tower without wasting the lives,  the default target height is 40 and default lives are 3. In the multiplayer mode there is an Ai that is moving randomly left and right and building its tower, it is displayed on the left side of the screen, if the Ai achieves the target before the player within the defined lives , it will win and the player will lose. Have used the clean code with event based system & SOLID principles 
 
 Additionally in the Unity project there is a tab of Game Settings, by selecting it we can change the movement speed ,Tetris Rotation speed, dash speed, the maximum height to win & no of lives the players can have 
 
